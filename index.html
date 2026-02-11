@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContaExcel - Convertidor PDF a Excel</title>
+    <meta name="description" content="Convierte tus estados de cuenta en PDF a Excel de forma rápida y profesional">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="url(#gradient1)" />
+                    <path d="M8 12h16M8 16h16M8 20h10" stroke="white" stroke-width="2" stroke-linecap="round" />
+                    <defs>
+                        <linearGradient id="gradient1" x1="0" y1="0" x2="32" y2="32">
+                            <stop offset="0%" stop-color="#667eea" />
+                            <stop offset="100%" stop-color="#764ba2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1>ContaExcel</h1>
+            </div>
+            <nav class="nav">
+                <a href="#hero" class="nav-link active">Inicio</a>
+                <a href="#converter" class="nav-link">Convertidor</a>
+                <a href="#como-funciona" class="nav-link">¿Cómo funciona?</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">✨ Gratis y sin registro</div>
+                <h2 class="hero-title">Convierte tus Estados de Cuenta de PDF a Excel</h2>
+                <p class="hero-subtitle">Transforma tus archivos PDF en hojas de cálculo Excel editables y organizadas
+                    en
+                    segundos</p>
+                <a href="#converter" class="cta-button">
+                    Comenzar ahora
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7 3l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-icon">�</div>
+                    <div class="card-text">PDF</div>
+                </div>
+                <div class="floating-card card-2">
+                    <div class="card-icon">✨</div>
+                    <div class="card-text">Convertir</div>
+                </div>
+                <div class="floating-card card-3">
+                    <div class="card-icon">�</div>
+                    <div class="card-text">Excel</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Converter Section -->
+    <section id="converter" class="converter-section">
+        <div class="container">
+            <div class="converter-card">
+                <div class="converter-header">
+                    <h3>Sube tu archivo PDF</h3>
+                    <p>Arrastra y suelta o haz clic para seleccionar</p>
+                </div>
+
+                <!-- Upload Area -->
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".pdf" hidden>
+                    <div class="upload-content">
+                        <div class="upload-icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                                <circle cx="32" cy="32" r="32" fill="#f0f4ff" />
+                                <path d="M32 20v24M20 32h24" stroke="url(#gradient2)" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <defs>
+                                    <linearGradient id="gradient2" x1="20" y1="20" x2="44" y2="44">
+                                        <stop offset="0%" stop-color="#667eea" />
+                                        <stop offset="100%" stop-color="#764ba2" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h4>Arrastra tu archivo PDF aquí</h4>
+                        <p>o haz clic para seleccionar</p>
+                        <span class="file-types">Soporta archivos .pdf</span>
+                    </div>
+                </div>
+
+                <!-- File Info -->
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <div class="file-icon">�</div>
+                        <div class="file-meta">
+                            <h4 id="fileName">archivo.xlsx</h4>
+                            <p id="fileSize">0 KB</p>
+                        </div>
+                    </div>
+                    <button class="remove-file" id="removeFile">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Preview Area -->
+                <div class="preview-area" id="previewArea" style="display: none;">
+                    <div class="preview-header">
+                        <h4>Vista previa</h4>
+                        <div class="sheet-selector">
+                            <label for="sheetSelect">Hoja:</label>
+                            <select id="sheetSelect"></select>
+                        </div>
+                    </div>
+                    <div class="preview-content" id="previewContent"></div>
+                </div>
+
+                <!-- Customization Options -->
+                <div class="customization-options" id="customizationOptions" style="display: none;">
+                    <h4>Personalizar Excel</h4>
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="sheetName">Nombre de la hoja</label>
+                            <input type="text" id="sheetName" placeholder="Estado de Cuenta">
+                        </div>
+                        <div class="option-group">
+                            <label for="styleSelect">Estilo de tabla</label>
+                            <select id="styleSelect">
+                                <option value="modern">Moderno (Predeterminado)</option>
+                                <option value="classic">Clásico</option>
+                                <option value="minimal">Minimalista</option>
+                                <option value="colorful">Colorido</option>
+                            </select>
+                        </div>
+                        <div class="option-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="autoWidth" checked>
+                                <span>Ajustar ancho de columnas automáticamente</span>
+                            </label>
+                        </div>
+                        <div class="option-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="freezeHeader" checked>
+                                <span>Congelar fila de encabezados</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convert Button -->
+                <button class="convert-button" id="convertButton" style="display: none;">
+                    <span>Generar Excel</span>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M5 10h10M10 5l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Generando tu Excel...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="como-funciona" class="features-section">
+        <div class="container">
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3>1. Sube tu archivo</h3>
+                    <p>Arrastra y suelta tu archivo PDF o selecciónalo desde tu dispositivo</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👀</div>
+                    <h3>2. Vista previa</h3>
+                    <p>Revisa el contenido extraído y personaliza el formato de tu Excel</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✨</div>
+                    <h3>3. Descarga</h3>
+                    <p>Genera y descarga tu Excel editable en segundos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5215640021233?text=Hola,%20tengo%20una%20duda%20sobre%20ContaExcel" class="whatsapp-button"
+        target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M16 0C7.164 0 0 7.164 0 16c0 2.828.736 5.484 2.016 7.792L0 32l8.384-2.016A15.923 15.923 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0z"
+                fill="#25D366" />
+            <path
+                d="M25.36 22.36c-.448 1.264-2.224 2.32-3.648 2.624-.976.208-2.256.368-6.544-1.408-5.488-2.272-9.024-7.84-9.296-8.208-.272-.368-2.208-2.944-2.208-5.616 0-2.672 1.392-3.984 1.888-4.528.496-.544 1.088-.672 1.456-.672.368 0 .736 0 1.056.016.336.016.784-.128 1.232.944.448 1.072 1.536 3.744 1.664 4.016.128.272.224.592.048.96-.176.368-.272.592-.544.912-.272.32-.576.704-.816.944-.272.272-.544.56-.24 1.104.304.544 1.36 2.24 2.912 3.632 2 1.792 3.68 2.352 4.208 2.608.528.256.832.224 1.136-.128.304-.352 1.296-1.52 1.648-2.048.352-.528.704-.448 1.184-.272.48.176 3.04 1.44 3.568 1.696.528.256.88.384 1.008.592.128.208.128 1.2-.32 2.464z"
+                fill="white" />
+        </svg>
+        <span class="whatsapp-tooltip">¿Tienes dudas? ¡Escríbenos!</span>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 ContaExcel. Hecho con ❤️ para facilitar tu trabajo.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        // Configure PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <script src="app.js"></script>
+</body>
+
+</html>
